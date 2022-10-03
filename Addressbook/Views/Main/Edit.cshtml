@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Редактировать";
+}
+
+<h3>Адресная книга / @ViewData["Title"]</h3>
+@{
+    const string pattFullname = "^[A-Za-zА-Яа-яЁё\\s]+$";
+    const string pattBirthday = "^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\\d\\d$";
+    const string pattEmail = "^^[A-Za-z0-9][A-Za-z0-9\\.\\-_]*[A-Za-z0-9]*@([A-Za-z0-9]+([A-Za-z0-9-]*[A-Za-z0-9]+)*\\.)+[A-Za-z]*$";
+}
+<table class="table">
+    <thead>
+        <tr>
+            @foreach (var chead in ViewBag.CPNames)
+            {
+                <th>@chead</th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @{ var formname = "EditPerson" + item.Id; }
+                <td width="10%">
+                    <input name="Id" value="@item.Id" form="@formname" type="text" class="form-control" readonly />
+                </td>
+                <td width="30%">
+                    <input name="FullName" value="@item.FullName" form="@formname" pattern="@pattFullname" type="text" class="form-control" />
+                </td>
+                <td>
+                    <input name="Birthday" value="@item.Birthday.ToString("yyyy-MM-dd")" form="@formname" type="date" class="form-control" />
+                </td>
+                <td>
+                    <input name="Email" value="@item.Email" form="@formname" pattern="@pattEmail" type="text" class="form-control" />
+                </td>
+                <td>
+                    <form action="Edit" id="@formname" method="post" class="d-inline">
+                        <input name="act" value="edit" hidden>
+                        <input type="submit" value="Изменить" class="btn" />
+                    </form>
+                    <form action="Edit" class="d-inline">
+                        <input name="act" value="delete" hidden>
+                        <input name="Id" value="@item.Id" hidden>
+                        <input type="submit" value="Удалить" class="btn" />
+                    </form>
+                </td>
+            </tr>
+        }
+        <tr>
+            @{ var addformname = "AddPerson"; }
+            <td>
+                <input name="Id" form="@addformname" type="text" class="form-control" readonly />
+            </td>
+            <td>
+                <input name="FullName" value="" form="@addformname" pattern="@pattFullname" placeholder="Иван Иванович Иванов" type="text" class="form-control" />
+            </td>
+            <td>
+                <input name="Birthday" value="" form="@addformname" pattern="@pattBirthday" type="date" class="form-control" />
+            </td>
+            <td>
+                <input name="Email" value="" form="@addformname" pattern="@pattEmail" placeholder="email@ema.il" type="text" class="form-control" />
+            </td>
+            <td>
+                <form action="Edit" id="@addformname" method="post" class="d-inline">
+                    <input name="act" value="add" hidden>
+                    <input type="submit" value="Добавить" class="btn" />
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>

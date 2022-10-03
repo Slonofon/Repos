@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "О сайте";
+}
+
+<div>
+    <h3>Адресная книга</h3>
+    <p>
+        Сайт адресной книги. Включает информацию о персоне: ФИО, дата рождения, e-mail. Позволяет искать 
+        информацию по всем полям. Для привилегированных  пользователей - редактировать.
+    </p>
+    <h6>Авторизация Windows</h6>
+    <p>
+        Для возможности редактирования записей текущий пользователь должен входить в локальную группу
+        "Опытные пользователи" (на примере Windows 7). В противном случае - ошибка HTTP ERROR 403 "У
+        вас нет прав для просмотра этой страницы." Кроме того, если у пользователя пустой пароль,
+        необходимо в "Редакторе локальной групповой политики" (gpedit.msc) проделать следующее:
+        <ul>
+            <li>Конфигурация компьютера / Конфигурация Windows / Параметры безопасности / Локальные политики / Параметры безопасности</li>
+            <li>Учетные записи: ограничить использование пустых паролей только при консольным входе: Отключен</li>
+        </ul>
+    </p>
+
+    <h6>Инициализация БД</h6>
+    <p>
+        Для первоначальной инициализации БД проделать следующее:
+        <ul>
+            <li>Меню "Вид" - "Другие окна" - "Консоль диспетчера пакетов"</li>
+            <li>Ввести в консоль: EntityFrameworkCore\Add-Migration Initial</li>
+            <li>Далее: EntityFrameworkCore\Update-Database</li>
+        </ul>
+    </p>
+
+    <h6>Описание API</h6>
+    <p>        
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Действие</th>
+                    <th>Метод</th>
+                    <th>Url</th>
+                </tr>
+            </thead>                
+            <tbody>
+                <tr>
+                    <td>Получение всех элементов</td>
+                    <td>GET</td>
+                    <td><code>api/addressbook</code></td>
+                </tr>
+                <tr>
+                    <td>Получение элемента с id равным 5</td>
+                    <td>GET</td>
+                    <td><code>api/addressbook/5</code></td>
+                </tr>
+                <tr>
+                    <td>Создание элемента</td>
+                    <td>POST</td>
+                    <td><code>api/addressbook</code></td>
+                </tr>
+                <tr>
+                    <td>Изменение элемента с id равным 5</td>
+                    <td>PUT</td>
+                    <td><code>api/addressbook/5</code></td>
+                </tr>
+                <tr>
+                    <td>Удаление элемента с id равным 5</td>
+                    <td>DELETE</td>
+                    <td><code>api/addressbook/5</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </p>
+
+    <p>
+        Разработан в <a href="https://visualstudio.microsoft.com/ru/vs/older-downloads/">
+            Microsoft Visual Studio 2017
+            Community Edition
+        </a> на основе технологии <a href="https://docs.microsoft.com/ru-ru/aspnet/core/tutorials/first-web-api">
+            ASP .NET Core Web API MVC
+        </a> (<a href="https://dotnet.microsoft.com/en-us/download/dotnet/2.2">
+            Microsoft
+            .NET Core SDK 2.2.110
+        </a>). СУБД <a href="https://www.microsoft.com/ru-RU/download/details.aspx?id=42299">
+            Microsoft SQL Server 2014 Express LocalDB
+        </a>.
+    </p>
+    <p>
+        <h6>NuGet пакеты:</h6>
+        <ul>
+            <li>Microsoft.AspNetCore.App (2.2.0)</li>
+            <li>Microsoft.AspNetCore.Razor.Design (2.2.0)</li>
+            <li>Microsoft.VisualStudio.Web.CodeGeneration.Design (2.2.3)</li>
+        </ul>
+    </p>
+</div>
